@@ -1,41 +1,52 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="home-card p-5 bg-white rounded elevation-3">
-      <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo"
-        class="rounded-circle">
-      <h1 class="my-5 bg-dark text-white p-3 rounded text-center">
-        Vue 3 Starter
-      </h1>
+ <div class="container-fluid">
+  <section class="row">
+    <div class="col-12">
+      <p>All your needs for tickets and events in one place!</p>
     </div>
-  </div>
+  </section>
+  <section class="row">
+    <div class="col-12">
+      <div>
+        <p>PlaceHolder for navigation bar based on type</p>
+      </div>
+    </div>
+  </section>
+  <section class="row justify-content-center align-items-center">
+    <div v-for="event in events" :key="event.id" class="col-12 col-md-2 m-3 p-1 bg-dark rounded">
+   <EventCard :event="event"></EventCard>
+    </div>
+  </section>
+ </div>
 </template>
 
 <script>
+import { computed, onMounted } from 'vue';
+import Pop from '../utils/Pop';
+import { eventService } from '../services/EventService';
+import { AppState } from "../AppState";
+import EventCard from '../components/EventCard.vue';
+
 export default {
-  setup() {
-    return {}
-  }
+    setup() {
+        onMounted(() => {
+            getEvents();
+        });
+        async function getEvents() {
+            try {
+                await eventService.getEvents();
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
+        return {
+            events: computed(() => AppState.events)
+        };
+    },
+    components: { EventCard }
 }
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-
-  .home-card {
-    width: 50vw;
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
 </style>
