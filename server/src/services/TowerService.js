@@ -3,11 +3,11 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class TowerService {
     async getEvents() {
-        const events = await dbContext.TowerEvents.find().populate('creator', 'name picture')
+        const events = await dbContext.TowerEvents.find().populate('creator ticketCount', 'name picture')
         return events
     }
     async getEventById(eventId) {
-        const event = await dbContext.TowerEvents.findById(eventId).populate('creator', 'name picture')
+        const event = await dbContext.TowerEvents.findById(eventId).populate('creator ticketCount', 'name picture')
         if (!event) {
             throw new BadRequest(`Couldn't find the event with the Id provided: ${eventId}`)
         }
@@ -32,6 +32,9 @@ class TowerService {
         const eventUpdating = await this.getEventById(eventId)
         if (userId != eventUpdating.creatorId.toString()) {
             throw new Forbidden(`You lack the authorization to edit this event: ${eventId}`)
+        }
+        if (eventUpdating.isCanceled == true) {
+            throw new BadRequest(`You cannot edit this event as it has been cancelled 😥`)
         }
 
         eventUpdating.startDate = eventData.startDate || eventUpdating.startDate
