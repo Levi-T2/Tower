@@ -13,7 +13,11 @@ class EventService {
     }
     async getEventById(eventId) {
         const res = await api.get(`api/events/${eventId}`)
-        logger.log(res.data)
+        // logger.log(res.data)
+        AppState.activeEvent = new Event(res.data)
+    }
+    clearAppState() {
+        AppState.activeEvent = null
     }
 }
 

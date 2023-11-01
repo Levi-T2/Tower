@@ -5,10 +5,14 @@
       <p>All your needs for tickets and events in one place!</p>
     </div>
   </section>
-  <section class="row">
-    <div class="col-12">
-      <div>
-        <p>PlaceHolder for navigation bar based on type</p>
+  <section class="row justify-content-center align-items-center">
+    <div class="col-10">
+      <div class="bg-dark rounded-pill p-1 m-1 d-flex">
+        <button class="btn btn-secondary w-100 m-2 rounded-pill">All</button>
+        <button 
+        v-for="type in types" 
+        :key="type" 
+        class="btn btn-secondary w-100 m-2 rounded-pill">{{ type }}</button>
       </div>
     </div>
   </section>
@@ -29,6 +33,7 @@ import EventCard from '../components/EventCard.vue';
 
 export default {
     setup() {
+      const types = ['Concert', 'Convention', 'Sport', 'Digital']
         onMounted(() => {
             getEvents();
         });
@@ -41,6 +46,7 @@ export default {
             }
         }
         return {
+          types,
             events: computed(() => AppState.events)
         };
     },
