@@ -16,6 +16,7 @@ class TowerService {
     async createEvent(eventData) {
         const event = await dbContext.TowerEvents.create(eventData)
         await event.populate('creator', 'name picture')
+        await event.populate('ticketCount')
         return event
     }
     async cancelEvent(eventId, userId) {
