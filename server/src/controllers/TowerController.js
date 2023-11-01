@@ -7,14 +7,26 @@ export class TowerController extends BaseController {
         super('api/events')
         this.router
             .get('', this.getEvents)
+            .get('/:eventId', this.getEventById)
             .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createEvent)
+            .put('/:eventId', this.editEvent)
+            .delete('/:eventId', this.cancelEvent)
     }
 
     async getEvents(request, response, next) {
         try {
             const events = await towerService.getEvents()
             return response.send(events)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async getEventById(request, response, next) {
+        try {
+            const eventId = request.params.eventId
+            const event = await towerService.getEventById(eventId)
+            return response.send(event)
         } catch (error) {
             next(error)
         }
@@ -26,6 +38,27 @@ export class TowerController extends BaseController {
             eventData.creatorId = userId
             const event = await towerService.createEvent(eventData)
             return response.send(event)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async cancelEvent(request, response, next) {
+        try {
+            const eventId = request.params.eventId
+            const userId = request.userInfo.id
+            const event = await towerService.cancelEvent(eventId, userId)
+            return response.send(event)
+        } catch (error) {
+            next(error)
+        }
+    }
+    async editEvent(request, response, next) {
+        try {
+            const eventId = request.params.eventId
+            const userId = request.userInfo.id
+            const eventData = request.body
+            const updatedEvent = await towerService.editEvent(eventId, userId, eventData)
+            return response.send(updatedEvent)
         } catch (error) {
             next(error)
         }
