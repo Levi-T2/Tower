@@ -6,6 +6,7 @@
              <p>{{ event.location }}</p>
              <p>{{ event.startDate.toLocaleDateString() }}</p>
              <p>Tickets Left: {{ event.capacity }}</p>
+             <marquee v-if="event.isCanceled == true" class="bg-danger rounded p-1">This event has been canceled 😥</marquee>
            </div>
     </RouterLink>
 </template>
@@ -21,7 +22,8 @@ export default {
         event: { type: Event, required: true }
     },
     setup() {
-        return {};
+        return {
+        };
     },
     components: { RouterLink }
 };

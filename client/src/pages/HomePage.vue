@@ -19,8 +19,8 @@
       </div>
     </div>
   </section>
-  <section class="row justify-content-center align-items-center">
-    <div v-for="event in events" :key="event.id" class="col-12 col-md-2 m-3 p-1 bg-dark rounded">
+  <section class="row justify-content-center align-items-center m-0">
+    <div v-for="event in events" :key="event.id" class="col-12 col-md-3 m-4 p-1 bg-dark rounded">
    <EventCard :event="event"></EventCard>
     </div>
   </section>

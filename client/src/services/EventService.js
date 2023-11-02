@@ -2,6 +2,7 @@ import { AppState } from "../AppState"
 import { Event } from "../models/Event"
 import { Ticket } from "../models/Ticket"
 import { logger } from "../utils/Logger"
+import Pop from "../utils/Pop"
 import { api } from "./AxiosService"
 
 class EventService {
@@ -28,6 +29,14 @@ class EventService {
         const res = await api.post('api/events', formData)
         const newEvent = new Event(res.data)
         AppState.events.push(newEvent)
+    }
+    async cancelEvent(eventId) {
+        const res = await api.delete(`api/events/${eventId}`)
+        logger.log(res.data)
+        AppState.events = AppState.events.filter(
+            (event) => event.id != eventId
+        );
+        Pop.toast(`The Event Was Successfully Cancelled`)
     }
     clearAppState() {
         AppState.activeEvent = null
