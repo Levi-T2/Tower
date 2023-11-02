@@ -6,21 +6,10 @@
     </div>
   </section>
   <section class="row justify-content-center align-items-center">
-    <div class="col-12 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center">
-      <button data-bs-toggle="modal" data-bs-target="#eventForm" class="btn btn-primary rounded-pill w-100">Create Event</button>
-    </div>
-    <div class="col-12 col-md-10">
-      <div class="bg-dark rounded-pill p-1 m-1 d-flex">
-        <button class="btn btn-secondary w-100 m-2 rounded-pill">All</button>
-        <button 
-        v-for="type in types" 
-        :key="type" 
-        class="btn btn-secondary w-100 m-2 rounded-pill">{{ type }}</button>
-      </div>
-    </div>
+    <TypeBar></TypeBar>
   </section>
   <section class="row justify-content-center align-items-center m-0">
-    <div v-for="event in events" :key="event.id" class="col-12 col-md-3 m-4 p-1 bg-dark rounded">
+    <div v-for="event in events" :key="event.id" class="col-12 col-md-3 m-4 p-1 event-card-style">
    <EventCard :event="event"></EventCard>
     </div>
   </section>
@@ -34,10 +23,10 @@ import Pop from '../utils/Pop';
 import { eventService } from '../services/EventService';
 import { AppState } from "../AppState";
 import EventCard from '../components/EventCard.vue';
+import TypeBar from '../components/TypeBar.vue';
 
 export default {
     setup() {
-      const types = ['Concert', 'Convention', 'Sport', 'Digital']
         onMounted(() => {
             getEvents();
         });
@@ -50,13 +39,24 @@ export default {
             }
         }
         return {
-          types,
             events: computed(() => AppState.events)
         };
     },
-    components: { EventCard }
+    components: { EventCard, TypeBar }
 }
 </script>
 
 <style scoped lang="scss">
+
+.event-card-style {
+  box-shadow: 2px 2px 6px 4px rgb(99, 99, 99);
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(4, 10, 31);
+}
+
+.event-card-style:hover {
+  box-shadow: 2px 2px 8px 6px blueviolet;
+}
+
 </style>

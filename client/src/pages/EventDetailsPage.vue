@@ -4,17 +4,17 @@
         <div class="col-12 p-1">
             <marquee v-if="event.isCanceled == true" class="bg-danger rounded p-1">This event has been canceled 😥</marquee>
         </div>
-        <div class="col-11 d-flex bg-dark m-2 p-3 event-card">
-            
+        <div class="col-12 col-md-10 d-flex bg-dark m-2 p-3 event-card flex-column">
        <EventDetailsCard :event="event"></EventDetailsCard>
         </div>
     </section>
-    <section class="row justify-content-center align-items-center">
-        <div v-for="ticketHolder in ticketHolders" :key="ticketHolder.id" class="col-12 col-md-9 bg-dark ticket-holders">
-       <TicketHolders :ticketHolder="ticketHolder"></TicketHolders>
+    <section v-if="ticketHolders" class="row justify-content-center align-items-center bg-dark ticket-holders m-2">
+        <p class="fw-bold ticket-txt text-center p-1">Ticket Holders</p>
+        <div v-for="ticketHolder in ticketHolders" :key="ticketHolder.id" class="col-12 col-md-1 d-flex p-2">
+                <TicketHolders :ticketHolder="ticketHolder"></TicketHolders>
         </div>
     </section>
-    <section class="row justify-content-center align-items-center bg-dark comment-section m-1">
+    <section class="row justify-content-center align-items-center bg-dark comment-section m-2">
         <div class="col-12 col-md-9 bg-dark">
             <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#commentForm">Comment</button>
         </div>
@@ -47,7 +47,7 @@ export default {
             clearAppState(),
             getEventById(),
             getTicketsForEvent(),
-            getCommentsByEventId()
+            getCommentsByEventId(),
         ]);
         async function getEventById() {
             try {
@@ -117,6 +117,10 @@ export default {
 
 .comment-border {
     border-bottom: 2px solid snow;
+}
+
+.ticket-txt {
+    border-bottom: 2px solid white;
 }
 
 

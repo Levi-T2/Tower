@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div v-if="event.creator.id == account.id" class="p-1 text-end">
+             <button @click="cancelEvent()" class="btn btn-danger">Cancel Event</button>
+            </div>
         <img :src="event.coverImg" alt="Event Image" class="event-img">
         <div class="p-4">
             <p class="fw-bold mb-0">{{ event.name }}</p>
@@ -12,12 +15,10 @@
             </div>
             <div v-else class="text-end">
                 <button @click="buyTicket(event.id)" class="btn btn-success rounded-pill">Buy Ticket</button>
+                <p v-if="isTicketHolder" class="text-success mt-4">You have a ticket for this Event</p>
             </div>
         </div>
     </div>
-    <div v-if="event.creator.id == account.id" class="p-1 text-center">
-         <button @click="cancelEvent()" class="btn btn-danger">Cancel Event</button>
-        </div>
 </template>
 
 
@@ -29,18 +30,21 @@ import Pop from '../utils/Pop';
 import { eventService } from '../services/EventService';
 import { useRoute } from 'vue-router';
 import { ticketService } from '../services/TicketService'
-import { logger } from '../utils/Logger';
 
 
 export default {
     props: {
-        event: { type: Event, required: true}
+        event: { type: Event, required: true},
     },
     setup(){
         const route = useRoute()
     return { 
         route,
         account: computed(() => AppState.account),
+        isTicketHolder: computed(() => 
+        AppState.ticketHolders.find (
+            (ticketHolder) => ticketHolder.profile.id == AppState.account.id
+        )),
         async cancelEvent() {
             try {
                 const yes = await Pop.confirm(`Are sure you want to cancel this event? This can't be undone.`)
@@ -59,7 +63,6 @@ export default {
                     if(!yes) {
                         return
                     }
-                    debugger
                     await ticketService.buyTicket(eventId)
                 } catch (error) {
                     Pop.error(error)
@@ -73,7 +76,7 @@ export default {
 
 <style lang="scss" scoped>
 .event-img{
-    width: 55dvh;
+    height: 40dvh;
     background-position: center;
     object-fit: cover;
     border-radius: 5px;

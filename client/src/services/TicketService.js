@@ -6,11 +6,11 @@ import { api } from "./AxiosService"
 
 class TicketService {
     async buyTicket(eventId) {
-        logger.log(eventId)
-       const res = await api.post('api/tickets', eventId)
+         const ticketData = { eventId: eventId}
+       const res = await api.post('api/tickets', ticketData)
        logger.log(res.data)
        const newTicketHolder = new Ticket(res.data)
-       AppState.ticketHolders = newTicketHolder
+       AppState.ticketHolders.push(newTicketHolder)
        Pop.toast('You got a ticket for this event!')
     }
 }

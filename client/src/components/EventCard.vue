@@ -1,7 +1,9 @@
 <template>
     <RouterLink class="text-light" :to="{ name: 'EventDetails', params: { eventId: event.id }}">
-        <img :src="event.coverImg" alt="Event Image" class="img-fluid rounded">
-           <div>
+        <div class="text-center">
+            <img :src="event.coverImg" alt="Event Image" class="event-img rounded my-4">
+        </div>
+           <div class="p-2">
              <p>{{ event.name }}</p>
              <p>{{ event.location }}</p>
              <p>{{ event.startDate.toLocaleDateString() }}</p>
@@ -31,5 +33,12 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.event-img{
+    height: 15rem;
+    width: 15rem;
+    background-position: center;
+    object-fit: cover;
+}
 
 </style>
