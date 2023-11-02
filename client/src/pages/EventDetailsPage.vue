@@ -10,12 +10,16 @@
        <TicketHolders :ticketHolder="ticketHolder"></TicketHolders>
         </div>
     </section>
-    <section class="row justify-content-center align-items-center">
-        <div v-for="comment in comments" :key="comment.id" class="col-12 col-md-9 bg-dark mt-3 p-2 d-flex align-items-center comment-section">
+    <section class="row justify-content-center align-items-center bg-dark comment-section m-1">
+        <div class="col-12 col-md-9 bg-dark">
+            <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#commentForm">Comment</button>
+        </div>
+        <div v-for="comment in comments" :key="comment.id" class="col-12 col-md-9 bg-dark mt-3 p-2 d-flex align-items-center comment-border">
            <CommentCard :comment="comment"></CommentCard>
         </div>
     </section>
    </div>
+   <CommentFormModal></CommentFormModal>
 </template>
 
 
@@ -29,6 +33,7 @@ import EventDetailsCard from '../components/EventDetailsCard.vue';
 import TicketHolders from '../components/TicketHolders.vue';
 import { commentService } from '../services/CommentService';
 import CommentCard from '../components/CommentCard.vue';
+import CommentFormModal from '../components/CommentFormModal.vue';
 
 
 export default {
@@ -80,7 +85,7 @@ export default {
             comments: computed(() => AppState.comments)
         };
     },
-    components: { EventDetailsCard, TicketHolders, CommentCard }
+    components: { EventDetailsCard, TicketHolders, CommentCard, CommentFormModal }
 };
 </script>
 
@@ -104,6 +109,10 @@ export default {
     padding: 1rem;
     border-radius: 6px;
     border:3px solid rgb(223, 223, 4) ;
+}
+
+.comment-border {
+    border-bottom: 2px solid snow;
 }
 
 
