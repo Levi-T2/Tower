@@ -1,9 +1,11 @@
 <template>
     <div>
         <div v-if="event.creator.id == account.id" class="p-1 text-end">
-             <button @click="cancelEvent()" class="btn btn-danger">Cancel Event</button>
+             <button v-if="event.isCanceled == false" @click="cancelEvent()" class="btn btn-danger">Cancel Event</button>
             </div>
-        <img :src="event.coverImg" alt="Event Image" class="event-img">
+            <div class="text-center">
+                <img :src="event.coverImg" alt="Event Image" class="event-img">
+            </div>
         <div class="p-4">
             <p class="fw-bold mb-0">{{ event.name }}</p>
             <p class="text-end">{{ event.startDate.toLocaleDateString() }}</p>

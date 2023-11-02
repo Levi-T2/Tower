@@ -1,16 +1,16 @@
 <template>
- <div class="container-fluid">
+ <div class="container-fluid bg-img">
   <section class="row">
     <div class="col-12 p-5 text-center">
       <p>All your needs for tickets and events in one place!</p>
     </div>
   </section>
   <section class="row justify-content-center align-items-center">
-    <div class="col-12 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center">
+    <div class="col-12 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center border-style">
       <button data-bs-toggle="modal" data-bs-target="#eventForm" class="btn btn-primary rounded-pill w-100">Create Event</button>
     </div>
     <div class="col-12 col-md-10">
-      <div class="bg-dark rounded-pill p-1 m-1 d-flex">
+      <div class="bg-dark rounded-pill p-1 m-1 d-flex border-style">
         <button @click="changeType('')" class="btn btn-secondary w-100 m-2 rounded-pill">All</button>
         <button @click="changeType(type)"
         v-for="type in types" 
@@ -65,6 +65,7 @@ export default {
             changeType(type) {
               filteredType.value = type
             },
+            
         };
     },
     components: { EventCard }
@@ -82,7 +83,17 @@ export default {
 }
 
 .event-card-style:hover {
-  box-shadow: 2px 2px 9px 7px blueviolet;
+  box-shadow: 2px 2px 9px 7px orange;
+}
+
+.border-style{
+  border: 4px ridge whitesmoke;
+}
+
+.bg-img{
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvBxpjDdSd3b5KnZKMNvbGnWDShOxELyEsf8XhGRVRLhT5CO5pn3EmNe3wZbdrMSmeReQ&usqp=CAU);
+  background-position: center;
+  background-size: cover;
 }
 
 </style>

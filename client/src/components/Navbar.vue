@@ -1,8 +1,11 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-img px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+      <div class="fs-3 tower-font">
+        <p class="mb-0">
+          <i class="mdi mdi-chess-rook"></i>
+          Tower
+        </p>
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -12,9 +15,6 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
@@ -52,5 +52,20 @@ a:hover {
   nav {
     height: 64px;
   }
+}
+
+.bg-img{
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvBxpjDdSd3b5KnZKMNvbGnWDShOxELyEsf8XhGRVRLhT5CO5pn3EmNe3wZbdrMSmeReQ&usqp=CAU);
+  background-position: center;
+  background-size: cover;
+  border-bottom: 4px ridge whitesmoke;
+}
+
+.tower{
+  background-image: url(https://www.figma.com/file/5x3vQisCZxtxeQz9xPEyFM/Tower?type=design&node-id=2-21&mode=design&t=S6s5tE4T67LwWW7H-4);
+}
+
+.tower-font{
+  font-family: 'MedievalSharp', cursive;
 }
 </style>

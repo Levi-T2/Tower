@@ -4,7 +4,7 @@
         <div class="col-12 p-1">
             <marquee v-if="event.isCanceled == true" class="bg-danger rounded p-1">This event has been canceled 😥</marquee>
         </div>
-        <div class="col-12 col-md-10 d-flex bg-dark m-2 p-3 event-card flex-column">
+        <div class="col-12 col-md-7 d-flex bg-dark m-2 p-3 event-card flex-column">
        <EventDetailsCard :event="event"></EventDetailsCard>
         </div>
     </section>
