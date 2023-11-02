@@ -2,27 +2,17 @@
    <div class="container-fluid">
     <section v-if="event" class="row justify-content-center">
         <div class="col-11 d-flex bg-dark m-2 p-3 event-card">
-            <img :src="event.coverImg" alt="Event Image" class="event-img">
-            <div class="p-4">
-                <p class="fw-bold mb-0">{{ event.name }}</p>
-                <p class="text-end">{{ event.startDate.toLocaleDateString() }}</p>
-                <p>{{ event.location }}</p>
-                <p>{{ event.description }}</p>
-                <p>{{ event.capacity }} Spots Left</p>
-                <div class="text-end">
-                    <button class="btn btn-success rounded-pill">Buy Ticket</button>
-                </div>
-            </div>
+       <EventDetailsCard :event="event"></EventDetailsCard>
         </div>
     </section>
-    <section class="row">
-        <div class="col-12">
-            <p>PlaceHolder for people attending this event</p>
+    <section class="row justify-content-center align-items-center">
+        <div v-for="ticketHolder in ticketHolders" :key="ticketHolder.id" class="col-12 col-md-9 bg-dark ticket-holders">
+       <TicketHolders :ticketHolder="ticketHolder"></TicketHolders>
         </div>
     </section>
-    <section class="row">
-        <div class="col-12">
-            <p>Place holder for the comment section with a comment form</p>
+    <section class="row justify-content-center align-items-center">
+        <div v-for="comment in comments" :key="comment.id" class="col-12 col-md-9 bg-dark mt-3 p-2 d-flex align-items-center comment-section">
+           <CommentCard :comment="comment"></CommentCard>
         </div>
     </section>
    </div>
@@ -35,50 +25,86 @@ import { useRoute } from 'vue-router';
 import Pop from '../utils/Pop';
 import { eventService } from '../services/EventService';
 import { AppState } from "../AppState";
+import EventDetailsCard from '../components/EventDetailsCard.vue';
+import TicketHolders from '../components/TicketHolders.vue';
+import { commentService } from '../services/CommentService';
+import CommentCard from '../components/CommentCard.vue';
 
 
 export default {
-    setup(){
-        const route = useRoute()
+    setup() {
+        const route = useRoute();
         onMounted(() => [
             clearAppState(),
-            getEventById()
+            getEventById(),
+            getTicketsForEvent(),
+            getCommentsByEventId()
         ]);
         async function getEventById() {
             try {
+                const eventId = route.params.eventId;
+                await eventService.getEventById(eventId);
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
+        function clearAppState() {
+            try {
+                eventService.clearAppState();
+            }
+            catch (error) {
+                Pop.error(error);
+            }
+        }
+        async function getTicketsForEvent() {
+            try {
                 const eventId = route.params.eventId
-                await eventService.getEventById(eventId)
+                await eventService.getTicketsForEvent(eventId)
             } catch (error) {
                 Pop.error(error)
             }
-        }   
-       function clearAppState() {
-        try {
-            eventService.clearAppState()
-        } catch (error) {
-            Pop.error(error)
         }
+        async function getCommentsByEventId() {
+            try {
+                const eventId = route.params.eventId
+                await commentService.getCommentsByEventId(eventId)
+            } catch (error) {
+                Pop.error(error)
+            }
         }
-    return { 
-        route,
-        event: computed(() => AppState.activeEvent)
-     }
-    }
+        return {
+            route,
+            event: computed(() => AppState.activeEvent),
+            ticketHolders: computed(() => AppState.ticketHolders),
+            comments: computed(() => AppState.comments)
+        };
+    },
+    components: { EventDetailsCard, TicketHolders, CommentCard }
 };
 </script>
 
 
 <style lang="scss" scoped>
 
-.event-img{
-    width: 55dvh;
-    background-position: center;
-    object-fit: cover;
-    border-radius: 5px;
-}
+
 
 .event-card{
     border-radius: 5px;
     border: 3px solid rgb(223, 223, 4) ;
 }
+
+.ticket-holders {
+    padding: 1rem;
+    border-radius: 6px;
+    border:3px solid rgb(223, 223, 4) ;
+}
+
+.comment-section {
+    padding: 1rem;
+    border-radius: 6px;
+    border:3px solid rgb(223, 223, 4) ;
+}
+
+
 </style>

@@ -1,7 +1,7 @@
 <template>
  <div class="container-fluid">
   <section class="row">
-    <div class="col-12">
+    <div class="col-12 p-5 text-center">
       <p>All your needs for tickets and events in one place!</p>
     </div>
   </section>
