@@ -13,6 +13,13 @@ class TicketService {
        AppState.ticketHolders.push(newTicketHolder)
        Pop.toast('You got a ticket for this event!')
     }
+async refundTicket(ticketId) {
+    const res = await api.delete(`api/tickets/${ticketId}`)
+    logger.log(res.data)
+    AppState.myTickets = AppState.myTickets.filter(
+        (ticket) => ticket.id != ticketId
+    );
+}
 }
 
 export const ticketService = new TicketService()

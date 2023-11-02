@@ -58,6 +58,7 @@ import { ref } from 'vue';
 import Pop from '../utils/Pop';
 import { eventService } from '../services/EventService';
 import { Modal } from 'bootstrap';
+import { router } from '../router';
 
 
 export default {
@@ -69,8 +70,10 @@ export default {
          async createEvent() {
             try {
                 const formData = editable.value
-                await eventService.createEvent(formData)
+                const event = await eventService.createEvent(formData)
+                editable.value = {}
                 Modal.getOrCreateInstance('#eventForm').hide()
+                router.push({ name: 'EventDetails', params: { eventId: event.id} })
             } catch (error) {
                 Pop.error
             }

@@ -29,6 +29,7 @@ class EventService {
         const res = await api.post('api/events', formData)
         const newEvent = new Event(res.data)
         AppState.events.push(newEvent)
+        return newEvent
     }
     async cancelEvent(eventId) {
         const res = await api.delete(`api/events/${eventId}`)
