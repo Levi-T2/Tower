@@ -24,6 +24,11 @@ class EventService {
         AppState.ticketHolders = ticketHolders
         logger.log(AppState.ticketHolders)
     }
+    async createEvent(formData) {
+        const res = await api.post('api/events', formData)
+        const newEvent = new Event(res.data)
+        AppState.events.push(newEvent)
+    }
     clearAppState() {
         AppState.activeEvent = null
         AppState.ticketHolders = []

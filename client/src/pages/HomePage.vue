@@ -6,7 +6,10 @@
     </div>
   </section>
   <section class="row justify-content-center align-items-center">
-    <div class="col-10">
+    <div class="col-12 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center">
+      <button data-bs-toggle="modal" data-bs-target="#eventForm" class="btn btn-primary rounded-pill w-100">Create Event</button>
+    </div>
+    <div class="col-12 col-md-10">
       <div class="bg-dark rounded-pill p-1 m-1 d-flex">
         <button class="btn btn-secondary w-100 m-2 rounded-pill">All</button>
         <button 
@@ -22,6 +25,7 @@
     </div>
   </section>
  </div>
+ <EventFormModal></EventFormModal>
 </template>
 
 <script>
