@@ -36,4 +36,14 @@ footer {
   place-content: center;
   height: 32px;
 }
+
+.bg-img{
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvBxpjDdSd3b5KnZKMNvbGnWDShOxELyEsf8XhGRVRLhT5CO5pn3EmNe3wZbdrMSmeReQ&usqp=CAU);
+  background-position: center;
+  background-size: cover;
+}
+
+.tower-font{
+  font-family: 'MedievalSharp', cursive;
+}
 </style>

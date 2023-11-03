@@ -39,6 +39,11 @@ class EventService {
         );
         Pop.toast(`The Event Was Successfully Cancelled`)
     }
+    async decreaseEventCapacity(Payload) {
+        Payload.capacity -= 1
+        const res2 = await api.put(`api/events/${Payload.id}`, Payload)
+        AppState.activeEvent = new Event(res2.data)
+    }
     clearAppState() {
         AppState.activeEvent = null
         AppState.ticketHolders = []

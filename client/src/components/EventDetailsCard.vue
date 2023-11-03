@@ -12,11 +12,14 @@
             <p>{{ event.location }}</p>
             <p>{{ event.description }}</p>
             <p>{{ event.capacity }} Spots Left</p>
-            <div v-if="event.isCanceled == true" class="text-end">
-                <button class="btn btn-info rounded-pill">Event is cancelled, no ticket</button>
+            <div v-if="event.capacity == 0" class="text-end">
+                <p class="text-danger fw-bold rounded-pill mb-0">Event is Sold Out 😔</p>
+            </div>
+            <div v-else-if="event.isCanceled == true" class="text-end">
+                <p class="text-danger fw-bold rounded-pill mb-0">Event is cancelled</p>
             </div>
             <div v-else class="text-end">
-                <button @click="buyTicket(event.id)" class="btn btn-success rounded-pill">Buy Ticket</button>
+                <button @click="buyTicket(event)"  class="btn btn-success rounded-pill">Buy Ticket</button>
                 <p v-if="isTicketHolder" class="text-success mt-4">You have a ticket for this Event</p>
             </div>
         </div>
@@ -59,17 +62,19 @@ export default {
                 Pop.error(error)
             }
         },
-        async buyTicket(eventId) {
+        async buyTicket(Event) {
                 try {
                     const yes = await Pop.confirm(`Are you sure you want to buy a ticket for this event?`)
                     if(!yes) {
                         return
                     }
+                    await eventService.decreaseEventCapacity(Event)
+                    const eventId = route.params.eventId
                     await ticketService.buyTicket(eventId)
                 } catch (error) {
                     Pop.error(error)
                 }
-            }
+            },
      }
     }
 };

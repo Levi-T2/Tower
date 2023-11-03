@@ -65,7 +65,4 @@ a:hover {
   background-image: url(https://www.figma.com/file/5x3vQisCZxtxeQz9xPEyFM/Tower?type=design&node-id=2-21&mode=design&t=S6s5tE4T67LwWW7H-4);
 }
 
-.tower-font{
-  font-family: 'MedievalSharp', cursive;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-   <div class="container-fluid">
+   <div class="container-fluid bg-img">
     <section v-if="event" class="row justify-content-center">
         <div class="col-12 p-1">
             <marquee v-if="event.isCanceled == true" class="bg-danger rounded p-1">This event has been canceled 😥</marquee>
@@ -14,7 +14,7 @@
                 <TicketHolders :ticketHolder="ticketHolder"></TicketHolders>
         </div>
     </section>
-    <section class="row justify-content-center align-items-center bg-dark comment-section m-2">
+    <section class="row justify-content-center align-items-center bg-dark comment-section m-2 gy-3">
         <div class="col-12 col-md-9 bg-dark">
             <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#commentForm">Comment</button>
         </div>
@@ -100,19 +100,19 @@ export default {
 
 .event-card{
     border-radius: 5px;
-    border: 3px solid rgb(223, 223, 4) ;
+    border: 4px ridge whitesmoke;
 }
 
 .ticket-holders {
     padding: 1rem;
     border-radius: 6px;
-    border:3px solid rgb(223, 223, 4) ;
+    border: 4px ridge whitesmoke;
 }
 
 .comment-section {
     padding: 1rem;
     border-radius: 6px;
-    border:3px solid rgb(223, 223, 4) ;
+    border: 4px ridge whitesmoke;
 }
 
 .comment-border {

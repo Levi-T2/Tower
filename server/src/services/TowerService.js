@@ -43,6 +43,7 @@ class TowerService {
         eventUpdating.type = eventData.type || eventUpdating.type
         eventUpdating.location = eventData.location || eventUpdating.location
         eventUpdating.coverImg = eventData.coverImg || eventUpdating.coverImg
+        eventUpdating.capacity = eventData.capacity || eventUpdating.capacity
 
         await eventUpdating.save()
         return eventUpdating

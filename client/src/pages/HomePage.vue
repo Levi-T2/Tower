@@ -1,9 +1,7 @@
 <template>
  <div class="container-fluid bg-img">
   <section class="row">
-    <div class="col-12 p-5 text-center">
-      <p>All your needs for tickets and events in one place!</p>
-    </div>
+    <Banner></Banner>
   </section>
   <section class="row justify-content-center align-items-center">
     <div class="col-12 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center border-style">
@@ -34,6 +32,7 @@ import Pop from '../utils/Pop';
 import { eventService } from '../services/EventService';
 import { AppState } from "../AppState";
 import EventCard from '../components/EventCard.vue';
+import Banner from '../components/Banner.vue';
 
 export default {
     setup() {
@@ -68,18 +67,19 @@ export default {
             
         };
     },
-    components: { EventCard }
+    components: { EventCard, Banner }
 }
 </script>
 
 <style scoped lang="scss">
 
 .event-card-style {
-  box-shadow: 2px 2px 5px 3px rgb(99, 99, 99);
+  box-shadow: 2px 2px 4px 3px rgb(41, 41, 41);
   border-radius: 5px;
   color: white;
-  background-color: rgb(4, 10, 31);
+  background-color: rgba(4, 10, 31, 0.596);
   transition: ease-in-out 0.25s;
+  border: 2px solid rgba(245, 245, 245, 0.226);
 }
 
 .event-card-style:hover {
@@ -90,10 +90,5 @@ export default {
   border: 4px ridge whitesmoke;
 }
 
-.bg-img{
-  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvBxpjDdSd3b5KnZKMNvbGnWDShOxELyEsf8XhGRVRLhT5CO5pn3EmNe3wZbdrMSmeReQ&usqp=CAU);
-  background-position: center;
-  background-size: cover;
-}
 
 </style>

@@ -5,12 +5,8 @@
      <AccountDetails :account="account"></AccountDetails>
     </div>
   </section>
-  <section class="row justify-content-center align-items-center">
-    <div class="col-12 col-md-4 account-style">
-      <p class="text-center fw-bold p-3">My Tickets</p>
-    </div>
-  </section>
-  <section class="row justify-content-center">
+  <section class="row justify-content-center account-style g-1" >
+    <p class="text-center fw-bold p-3">My Tickets</p>
     <div v-for="ticket in myTickets" :key="ticket.id" class="col-12 col-md-3 ticket-style g-2 m-2 p-2">
       <TicketCard :ticket="ticket"></TicketCard>
     </div>
@@ -40,7 +36,7 @@ export default {
 }
 
 .account-style{
-  background-color:rgb(4, 10, 31);
+  background-color:rgba(4, 10, 31, 0.589);
   border-radius: 5px;
   color: white;
   border: 5px ridge whitesmoke;
@@ -55,11 +51,7 @@ export default {
 }
 
 .ticket-style:hover{
-  border: 4px ridge blueviolet
+  border: 4px ridge orange
 }
 
-.bg-img{
-  background-image: url(https://www.pixground.com/wp-content/uploads/2023/02/Serene-Forest-Fog-Nature-Scenery-.jpg);
-  backdrop-filter: blur(3px);
-}
 </style>
