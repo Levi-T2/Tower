@@ -10,7 +10,7 @@
     <div class="col-12 col-md-10">
       <div class="p-2 m-1 type-selector border-style">
         <button @click="changeType('')" class="btn btn-secondary w-100 m-2 rounded-pill">All</button>
-        <button @click="changeType(type)"
+        <button @click="changeType(type.toLocaleLowerCase())"
         v-for="type in types" 
         :key="type" 
         class="btn btn-secondary w-100 m-2 rounded-pill">{{ type }}</button>
@@ -36,7 +36,7 @@ import Banner from '../components/Banner.vue';
 
 export default {
     setup() {
-      const types = ['concert', 'convention', 'sport', 'digital']
+      const types = ['Concert', 'Convention', 'Sport', 'Digital']
       const filteredType = ref("")
         onMounted(() => {
             getEvents();
