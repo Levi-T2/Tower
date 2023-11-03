@@ -7,7 +7,8 @@
              <p>{{ event.name }}</p>
              <p>{{ event.location }}</p>
              <p>{{ event.startDate.toLocaleDateString() }}</p>
-             <p>Tickets Left: {{ event.capacity }}</p>
+             <p>Tickets Left: {{ event.capacity - event.ticketCount }}</p>
+             <marquee v-if="(event.capacity - event.ticketCount) <= 0" class="bg-warning rounded p-1">Sold Out!</marquee>
              <marquee v-if="event.isCanceled == true" class="bg-danger rounded p-1">This event has been canceled 😥</marquee>
            </div>
     </RouterLink>
@@ -40,5 +41,6 @@ export default {
     background-position: center;
     object-fit: cover;
 }
+
 
 </style>

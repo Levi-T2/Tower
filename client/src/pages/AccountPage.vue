@@ -1,13 +1,13 @@
 <template>
 <div class="container-fluid bg-img">
   <section class="row justify-content-center">
-    <div class="col-12 col-md-3 account-style p-2 m-4 text-center">
+    <div class="col-11 col-md-3 account-style p-2 m-4 text-center">
      <AccountDetails :account="account"></AccountDetails>
     </div>
   </section>
   <section class="row justify-content-center account-style g-1" >
     <p class="text-center fw-bold p-3">My Tickets</p>
-    <div v-for="ticket in myTickets" :key="ticket.id" class="col-12 col-md-3 ticket-style g-2 m-2 p-2">
+    <div v-for="ticket in myTickets" :key="ticket.id" class="col-12 col-md-3 ticket-style g-2 m-2 p-3">
       <TicketCard :ticket="ticket"></TicketCard>
     </div>
   </section>
@@ -52,6 +52,16 @@ export default {
 
 .ticket-style:hover{
   border: 4px ridge orange
+}
+
+@media (max-width: 768px) {
+  .ticket-style{
+  background-color:rgb(4, 10, 31);
+  border-radius: 9px;
+  border: 0px ridge whitesmoke;
+  color: white;
+  transition: ease-in-out 0.25s;
+}
 }
 
 </style>

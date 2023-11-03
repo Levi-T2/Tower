@@ -2,11 +2,9 @@
   <header class="sticky-top">
     <Navbar />
   </header>
-  <main>
-    <router-view />
+  <main class="bg-img">
+    <router-view/>
   </main>
-   <footer>
-  </footer>
 </template>
 
 <script>

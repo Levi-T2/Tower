@@ -1,7 +1,9 @@
 <template>
     <div>
+        <p v-if="(event.capacity - event.ticketCount) <= 0" class="mb-0 text-center fs-2 tower-font text-danger">Sold Out</p>
         <div v-if="event.creator.id == account.id" class="p-1 text-end">
              <button v-if="event.isCanceled == false" @click="cancelEvent()" class="btn btn-danger">Cancel Event</button>
+
             </div>
             <div class="text-center">
                 <img :src="event.coverImg" alt="Event Image" class="event-img">
@@ -11,15 +13,15 @@
             <p class="text-end">{{ event.startDate.toLocaleDateString() }}</p>
             <p>{{ event.location }}</p>
             <p>{{ event.description }}</p>
-            <p>{{ event.capacity }} Spots Left</p>
-            <div v-if="event.capacity == 0" class="text-end">
+            <p>{{ event.capacity - event.ticketCount }} Spots Left</p>
+            <div v-if="(event.capacity - event.ticketCount) <= 0" class="text-end">
                 <p class="text-danger fw-bold rounded-pill mb-0">Event is Sold Out 😔</p>
             </div>
             <div v-else-if="event.isCanceled == true" class="text-end">
                 <p class="text-danger fw-bold rounded-pill mb-0">Event is cancelled</p>
             </div>
             <div v-else class="text-end">
-                <button @click="buyTicket(event)"  class="btn btn-success rounded-pill">Buy Ticket</button>
+                <button @click="buyTicket()"  class="btn btn-success rounded-pill">Buy Ticket</button>
                 <p v-if="isTicketHolder" class="text-success mt-4">You have a ticket for this Event</p>
             </div>
         </div>
@@ -62,13 +64,13 @@ export default {
                 Pop.error(error)
             }
         },
-        async buyTicket(Event) {
+        async buyTicket() {
                 try {
                     const yes = await Pop.confirm(`Are you sure you want to buy a ticket for this event?`)
                     if(!yes) {
                         return
                     }
-                    await eventService.decreaseEventCapacity(Event)
+                  
                     const eventId = route.params.eventId
                     await ticketService.buyTicket(eventId)
                 } catch (error) {
@@ -87,5 +89,15 @@ export default {
     background-position: center;
     object-fit: cover;
     border-radius: 5px;
+}
+
+
+@media (max-width: 768px) {
+    .event-img{
+    height: 24dvh;
+    background-position: center;
+    object-fit: cover;
+    border-radius: 5px;
+}
 }
 </style>

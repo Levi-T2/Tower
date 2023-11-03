@@ -4,11 +4,11 @@
     <Banner></Banner>
   </section>
   <section class="row justify-content-center align-items-center">
-    <div class="col-12 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center border-style">
+    <div class="col-11 col-md-3 bg-dark rounded-pill p-2 m-1 d-flex justify-content-center border-style">
       <button data-bs-toggle="modal" data-bs-target="#eventForm" class="btn btn-primary rounded-pill w-100">Create Event</button>
     </div>
     <div class="col-12 col-md-10">
-      <div class="bg-dark rounded-pill p-1 m-1 d-flex border-style">
+      <div class="p-2 m-1 type-selector border-style">
         <button @click="changeType('')" class="btn btn-secondary w-100 m-2 rounded-pill">All</button>
         <button @click="changeType(type)"
         v-for="type in types" 
@@ -90,5 +90,19 @@ export default {
   border: 4px ridge whitesmoke;
 }
 
+.type-selector{
+  display: flex;
+  background-color: rgba(4, 10, 31, 0.596);
+  border-radius: 50px;
+}
 
+@media (max-width: 768px) {
+  .type-selector{
+  display: flex;
+  background-color: rgba(4, 10, 31, 0.596);
+  border-radius: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+}
 </style>
